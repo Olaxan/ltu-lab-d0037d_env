@@ -1,6 +1,7 @@
 #pragma once
 
 #include "matharr.h"
+#include "assignmentapp.h"
 
 namespace Assignment
 {
@@ -24,7 +25,9 @@ namespace Assignment
 	{
 	public:
 
-		Square(float dimension = 1);
+		float size;
+
+		Square(float x = 0.5f, float y = 0.5f, float size = 0.5f);
 
 		void Update();
 		void Draw();
@@ -50,7 +53,7 @@ namespace Assignment
 	{
 	public:
 
-		Circle(float radius = 1, float segments = 8);
+		Circle(float radius = 1, int segments = 8);
 
 		void Update();
 		void Draw();
