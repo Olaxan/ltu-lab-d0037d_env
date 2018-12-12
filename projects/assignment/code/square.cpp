@@ -32,8 +32,14 @@ namespace Assignment
 		bottom.x2 = xRight;
 
 		left.y1 = yTop;
-		left.y2
-		
+		left.y2 = yBottom;
+		left.x1 = xLeft;
+		left.x2 = xLeft;
+
+		right.y1 = yTop;
+		right.y2 = yBottom;
+		right.x1 = xRight;
+		right.x2 = xRight;
 
 	}
 
