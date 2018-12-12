@@ -22,6 +22,7 @@
     <ProjectGuid>{065A13CC-3A27-4903-AC1C-C69DF8EA571D}</ProjectGuid>
     <RootNamespace>AssignmentDemo</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectName>Assignment</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -126,10 +127,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="projects\assignment\code\assignmentapp.cc" />
+    <ClCompile Include="projects\assignment\code\circle.cpp" />
     <ClCompile Include="projects\assignment\code\main.cc" />
+    <ClCompile Include="projects\assignment\code\matrix2D.cpp" />
+    <ClCompile Include="projects\assignment\code\square.cpp" />
+    <ClCompile Include="projects\assignment\code\triangle.cpp" />
+    <ClCompile Include="projects\assignment\code\vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="projects\assignment\code\assignmentapp.h" />
+    <ClInclude Include="projects\assignment\code\matharr.h" />
+    <ClInclude Include="projects\assignment\code\shapes.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="gscept-lib.vcxproj">

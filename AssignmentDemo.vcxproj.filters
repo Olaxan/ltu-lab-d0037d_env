@@ -1,10 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\projects\assignment\code\assignmentapp.cc" />
-    <ClCompile Include="..\projects\assignment\code\main.cc" />
+    <ClCompile Include="projects\assignment\code\assignmentapp.cc" />
+    <ClCompile Include="projects\assignment\code\main.cc" />
+    <ClCompile Include="projects\assignment\code\matrix2D.cpp" />
+    <ClCompile Include="projects\assignment\code\vector2D.cpp" />
+    <ClCompile Include="projects\assignment\code\square.cpp" />
+    <ClCompile Include="projects\assignment\code\triangle.cpp" />
+    <ClCompile Include="projects\assignment\code\circle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\projects\assignment\code\assignmentapp.h" />
+    <ClInclude Include="projects\assignment\code\assignmentapp.h" />
+    <ClInclude Include="projects\assignment\code\matharr.h" />
+    <ClInclude Include="projects\assignment\code\shapes.h" />
   </ItemGroup>
 </Project>
