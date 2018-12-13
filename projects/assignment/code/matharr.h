@@ -4,15 +4,14 @@
 
 namespace Assignment
 {
-
+	
 	class Matrix2D
 	{
 	private:
 		float _arr[4];
 	public:
-		Matrix2D();
 		Matrix2D(const Matrix2D &copy);
-		Matrix2D(float a, float b, float c, float d);
+		Matrix2D(float a = 0, float b = 0, float c = 0, float d = 0);
 
 		Matrix2D operator * (const Matrix2D &other) const;
 		Matrix2D& operator = (const Matrix2D &other);
@@ -29,11 +28,10 @@ namespace Assignment
 		const float& d() const { return this->_arr[3]; }
 		void d(const float& d) { this->_arr[3] = d; }
 
-		//Applies a rotation the the matrix (in degrees). Returns a pointer to the new resulting Matrix2D.
-		Matrix2D* getRotated(const float &angle) const;
+		static Matrix2D getRotationMatrix(const float &deg);
 
 		//Switch rows/columns in the matrix. Returns a pointer to the new resulting Matrix2D. 
-		Matrix2D* getTransposed() const;
+		Matrix2D getTransposed() const;
 
 		std::string to_string();
 
@@ -45,10 +43,12 @@ namespace Assignment
 	private:
 		float _arr[2];
 	public:
-		Vector2D();
 		Vector2D(const Vector2D &copy);
-		Vector2D(float x, float y);
+		Vector2D(float x = 0, float y = 0);
 
+		Vector2D& operator += (const Vector2D &other);
+		Vector2D& operator -= (const Vector2D &other);
+		Vector2D& operator *= (const Matrix2D &other);
 		Vector2D operator + (const Vector2D &other) const;
 		Vector2D operator - (const Vector2D &other) const;
 		Vector2D operator * (const Vector2D &other) const;
@@ -67,7 +67,7 @@ namespace Assignment
 		float norm() const;
 
 		//Performs a matrix transformation on the Vector2D. Returns a pointer to the new resulting Vector2D.
-		Vector2D* getTransformed(const Matrix2D &trans) const;
+		Vector2D getTransformed(const Matrix2D &trans) const;
 
 		std::string to_string() const;
 

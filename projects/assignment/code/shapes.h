@@ -7,12 +7,16 @@ namespace Assignment
 {
 	class Shape
 	{
+	protected:
+		Vector2D* _vertices;
+		AssignmentApp::LineData* _lines;
+
 	public:
 
-		Vector2D position;
-		Matrix2D rotation;
+		Vector2D position = Vector2D(0, 0);
+		Matrix2D rotation = Matrix2D::getRotationMatrix(0);
 
-		unsigned int rgb;
+		AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0);
 
 		virtual void Update() = 0;
 		virtual void Draw() = 0;
@@ -25,9 +29,9 @@ namespace Assignment
 	{
 	public:
 
-		float size;
-
 		Square(float x = 0.5f, float y = 0.5f, float size = 0.5f);
+
+		float size;
 
 		void Update();
 		void Draw();
@@ -40,7 +44,7 @@ namespace Assignment
 	{
 	public:
 
-		Triangle(float base = 1, float height = 1);
+		Triangle(float x = 0.5f, float y = 0.5f, float base = 1, float height = 1);
 
 		void Update();
 		void Draw();
@@ -51,9 +55,12 @@ namespace Assignment
 
 	class Circle : public Shape
 	{
+	private:
+		int segments;
+		int radius;
 	public:
 
-		Circle(float radius = 1, int segments = 8);
+		Circle(float x = 0.5f, float y = 0.5f, float radius = 1, int segments = 8);
 
 		void Update();
 		void Draw();

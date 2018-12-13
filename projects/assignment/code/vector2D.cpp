@@ -5,12 +5,6 @@
 namespace Assignment
 {
 
-	Vector2D::Vector2D()
-	{
-		this->x(0);
-		this->y(0);
-	}
-
 	Vector2D::Vector2D(const Vector2D& copy)
 	{
 		this->x(copy.x());
@@ -21,6 +15,26 @@ namespace Assignment
 	{
 		this->x(x);
 		this->y(y);
+	}
+
+	Vector2D& Vector2D::operator+=(const Vector2D & other)
+	{
+		this->x += other.x;
+		this->y += other.y;
+		return *this;
+	}
+
+	Vector2D& Vector2D::operator-=(const Vector2D & other)
+	{
+		this->x -= other.x;
+		this->y -= other.y;
+		return *this;
+	}
+
+	Vector2D & Vector2D::operator*=(const Matrix2D & other)
+	{
+		(*this) = (*this) * other;
+		return (*this);
 	}
 
 	Vector2D Vector2D::operator + (const Vector2D& other) const
@@ -75,14 +89,14 @@ namespace Assignment
 		return sqrt(powf(this->x(), 2) + powf(this->y(), 2));
 	}
 
-	Vector2D* Vector2D::getTransformed(const Matrix2D &trans) const
+	Vector2D Vector2D::getTransformed(const Matrix2D &trans) const
 	{
-		return new Vector2D((*this) * trans);
+		return Vector2D((*this) * trans);
 	}
 
 	std::string Vector2D::to_string() const
 	{
-		return std::to_string(this->x()) + ", " + std::to_string(this->y());
+		return std::to_string(this->x()) + ";\n" + std::to_string(this->y()) + ";\n";
 	}
 
 	Vector2D::~Vector2D() { }

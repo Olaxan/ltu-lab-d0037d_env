@@ -4,44 +4,37 @@ namespace Assignment
 {
 	Square::Square(float x, float y, float size)
 	{
-		position = Vector2D(x, y);
+		this->_vertices = new Vector2D[4]{ Vector2D(), Vector2D(), Vector2D(), Vector2D() };
+		this->position = Vector2D(x, y);
 		this->size = size;
 	}
 
 	void Square::Update()
 	{
+
+		float yTop = position.y - size / 2;
+		float xRight = position.x + size / 2;
+		float yBottom = position.y + size / 2;
+		float xLeft = position.x - size / 2;
+
+		_vertices[0].x = xLeft;
+		_vertices[0].y = yTop;
+
+		_vertices[1].x = xRight;
+		_vertices[1].y = yTop;
+
+		_vertices[2].x = xLeft;
+		_vertices[2].y = yBottom;
+
+		_vertices[3].x = xRight;
+		_vertices[3].y = yBottom;
+
 	}
 
 	void Square::Draw()
 	{
-		float yTop = position.y - size / 2;;
-		float xRight = position.x + size / 2;;
-		float yBottom = position.y + size / 2;
-		float xLeft = position.x - size / 2;
-
-		AssignmentApp::LineData top, right, bottom, left;
-
-		top.y1 = yTop;
-		top.y2 = yTop;
-		top.x1 = xLeft;
-		top.x2 = xRight;
-
-		bottom.y1 = yBottom;
-		bottom.y2 = yBottom;
-		bottom.x1 = xLeft;
-		bottom.x2 = xRight;
-
-		left.y1 = yTop;
-		left.y2 = yBottom;
-		left.x1 = xLeft;
-		left.x2 = xLeft;
-
-		right.y1 = yTop;
-		right.y2 = yBottom;
-		right.x1 = xRight;
-		right.x2 = xRight;
-
+		
 	}
 
-	Square::~Square() { }
+	Square::~Square() { delete[] _vertices; }
 }
