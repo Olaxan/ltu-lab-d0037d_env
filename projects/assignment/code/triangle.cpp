@@ -2,7 +2,7 @@
 
 namespace Assignment
 {
-	Triangle::Triangle(float base, float height) { }
+	Triangle::Triangle(float x, float y, float base, float height) { }
 	void Triangle::Update()
 	{
 	}

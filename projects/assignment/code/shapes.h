@@ -1,6 +1,7 @@
 #pragma once
 
 #include "matharr.h"
+#include "config.h"
 #include "assignmentapp.h"
 
 namespace Assignment
@@ -21,7 +22,23 @@ namespace Assignment
 		virtual void Update() = 0;
 		virtual void Draw() = 0;
 
-		virtual ~Shape() = 0;
+		virtual ~Shape() { };
+
+	};
+
+	class Circle : public Shape
+	{
+	private:
+		int segments;
+		float radius;
+	public:
+
+		Circle(float x = 0.5f, float y = 0.5f, float radius = 0.25f, int segments = 8);
+
+		void Update();
+		void Draw();
+
+		~Circle();
 
 	};
 
@@ -53,20 +70,6 @@ namespace Assignment
 
 	};
 
-	class Circle : public Shape
-	{
-	private:
-		int segments;
-		int radius;
-	public:
-
-		Circle(float x = 0.5f, float y = 0.5f, float radius = 1, int segments = 8);
-
-		void Update();
-		void Draw();
-
-		~Circle();
-
-	};
+	
 
 }

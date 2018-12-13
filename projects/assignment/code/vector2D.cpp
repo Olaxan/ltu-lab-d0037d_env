@@ -19,15 +19,15 @@ namespace Assignment
 
 	Vector2D& Vector2D::operator+=(const Vector2D & other)
 	{
-		this->x += other.x;
-		this->y += other.y;
+		this->x(this->x() + other.x());
+		this->y(this->y() + other.y());
 		return *this;
 	}
 
 	Vector2D& Vector2D::operator-=(const Vector2D & other)
 	{
-		this->x -= other.x;
-		this->y -= other.y;
+		this->x(this->x() - other.x());
+		this->y(this->y() - other.y());
 		return *this;
 	}
 

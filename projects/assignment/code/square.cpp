@@ -12,22 +12,22 @@ namespace Assignment
 	void Square::Update()
 	{
 
-		float yTop = position.y - size / 2;
-		float xRight = position.x + size / 2;
-		float yBottom = position.y + size / 2;
-		float xLeft = position.x - size / 2;
+		float yTop = position.y() - size / 2;
+		float xRight = position.x() + size / 2;
+		float yBottom = position.y() + size / 2;
+		float xLeft = position.x() - size / 2;
 
-		_vertices[0].x = xLeft;
-		_vertices[0].y = yTop;
+		_vertices[0].x(xLeft);
+		_vertices[0].y(yTop);
 
-		_vertices[1].x = xRight;
-		_vertices[1].y = yTop;
+		_vertices[1].x(xRight);
+		_vertices[1].y(yTop);
 
-		_vertices[2].x = xLeft;
-		_vertices[2].y = yBottom;
+		_vertices[2].x(xLeft);
+		_vertices[2].y(yBottom);
 
-		_vertices[3].x = xRight;
-		_vertices[3].y = yBottom;
+		_vertices[3].x(xRight);
+		_vertices[3].y(yBottom);
 
 	}
 

@@ -1,3 +1,4 @@
+#pragma once
 //------------------------------------------------------------------------------
 /**
 	Application class used for Assignment applications.
@@ -9,7 +10,6 @@
 #include "core/app.h"
 #include "render/window.h"
 #include "2d/2dapp.h"
-#include "shapes.h"
 
 #include <vector>
 
@@ -24,6 +24,8 @@ namespace Assignment
 			static AssignmentApp instance;
 			return instance;
 		}
+
+		static int time;
 
 		std::vector<Shape*> renderQueue;
 

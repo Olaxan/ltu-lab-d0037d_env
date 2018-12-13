@@ -4,9 +4,14 @@
 //------------------------------------------------------------------------------
 #include "config.h"
 #include "assignmentapp.h"
+#include "shapes.h"
+
+#include <iostream>
 
 namespace Assignment
 {
+
+	int AssignmentApp::time = 0;
 
 //------------------------------------------------------------------------------
 /**
@@ -30,9 +35,7 @@ AssignmentApp::~AssignmentApp()
 void 
 AssignmentApp::Setup()
 {
-	renderQueue.push_back(&Triangle(0.3F, 0.3F));
-	renderQueue.push_back(&Square(0.5F, 0.5F, 0.25F));
-	renderQueue.push_back(&Circle(0.75F, 0.75F, 0.3F));
+	renderQueue.push_back(new Circle(-1, 0, 0.25F, 3));
 }
 //------------------------------------------------------------------------------
 /**
@@ -40,9 +43,14 @@ AssignmentApp::Setup()
 void
 AssignmentApp::Update()
 {
+	time++;
+
 	for (int i = 0; i < renderQueue.size(); i++)
 	{
 		renderQueue[i]->Draw();
+		renderQueue[i]->position = Vector2D(0.5f * sin(0.005f * time), 0.5f * cos(0.005f * time));
+		renderQueue[i]->rotation = Matrix2D::getRotationMatrix(0.005f * time);
+		renderQueue[i]->Update();
 	}
 }
 
