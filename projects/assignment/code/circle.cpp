@@ -6,7 +6,7 @@ const float  PI_F = 3.14159265358979f;
 
 namespace Assignment
 {
-	Circle::Circle(float x, float y, float radius, int segments)
+	Polygon::Polygon(float x, float y, float radius, int segments)
 	{
 		this->_vertices = new Vector2D[segments];
 		this->_lines = new AssignmentApp::LineData[segments];
@@ -19,7 +19,7 @@ namespace Assignment
 		this->radius = radius;
 		this->Update();
 	}
-	void Circle::Update()
+	void Polygon::Update()
 	{
 		float delta = (2 * PI_F) / segments;
 
@@ -42,6 +42,7 @@ namespace Assignment
 			}
 		}
 
+		//Close the circle - the last segment must connect the first and last vertices.
 		_lines[segments - 1].x1 = _vertices[0].x();
 		_lines[segments - 1].y1 = _vertices[0].y();
 		_lines[segments - 1].x2 = _vertices[segments - 1].x();
@@ -50,7 +51,7 @@ namespace Assignment
 		_lines[segments - 1].c2 = color;
 	}
 
-	void Circle::Draw()
+	void Polygon::Draw()
 	{
 		for (int i = 0; i < segments; i++)
 		{
@@ -58,7 +59,7 @@ namespace Assignment
 		}
 	}
 
-	Circle::~Circle()
+	Polygon::~Polygon()
 	{
 	}
 }

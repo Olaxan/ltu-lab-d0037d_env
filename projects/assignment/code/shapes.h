@@ -26,19 +26,19 @@ namespace Assignment
 
 	};
 
-	class Circle : public Shape
+	class Polygon : public Shape
 	{
 	private:
 		int segments;
 		float radius;
 	public:
 
-		Circle(float x = 0.5f, float y = 0.5f, float radius = 0.25f, int segments = 8);
+		Polygon(float x = 0.5f, float y = 0.5f, float radius = 0.25f, int segments = 8);
 
 		void Update();
 		void Draw();
 
-		~Circle();
+		~Polygon();
 
 	};
 
