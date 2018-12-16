@@ -35,7 +35,7 @@ namespace Assignment
 	void 
 	AssignmentApp::Setup()
 	{
-		renderQueue.push_back(new Polygon(-0.5, 0, 0.25F, 8));
+		renderQueue.push_back(new Rectangle(-0.5, 0, 0.25F));
 		renderQueue.push_back(new Polygon(0, 0, 0.25F, 4));
 		renderQueue.push_back(new Polygon(0.5, 0, 0.25F, 3));
 

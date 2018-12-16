@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-const float  PI_F = 3.14159265358979f;
+
 
 namespace Assignment
 {
@@ -21,7 +21,7 @@ namespace Assignment
 	}
 	void Polygon::Update()
 	{
-		float delta = (2 * PI_F) / segments;
+		float delta = (2 * Shape::PI_F) / segments;
 
 		for (int i = 0; i < segments; i++)
 		{
@@ -61,5 +61,7 @@ namespace Assignment
 
 	Polygon::~Polygon()
 	{
+		delete[] _lines;
+		delete[] _vertices;
 	}
 }

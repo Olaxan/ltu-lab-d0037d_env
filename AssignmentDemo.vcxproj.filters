@@ -8,6 +8,7 @@
     <ClCompile Include="projects\assignment\code\circle.cpp" />
     <ClCompile Include="projects\assignment\code\matrix2D.cpp" />
     <ClCompile Include="projects\assignment\code\vector2D.cpp" />
+    <ClCompile Include="projects\assignment\code\shape.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="projects\assignment\code\assignmentapp.h" />

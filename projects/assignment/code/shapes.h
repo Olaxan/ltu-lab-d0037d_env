@@ -14,6 +14,8 @@ namespace Assignment
 
 	public:
 
+		static const float PI_F;
+
 		Vector2D position = Vector2D(0, 0);
 		Matrix2D rotation = Matrix2D::getRotationMatrix(0);
 
@@ -42,18 +44,19 @@ namespace Assignment
 
 	};
 
-	class Square : public Shape
+	class Rectangle : public Shape
 	{
 	public:
 
-		Square(float x = 0.5f, float y = 0.5f, float size = 0.5f);
+		Rectangle(float x = 0.5f, float y = 0.5f, float height = 0.25f, float width = 0.5f);
 
-		float size;
+		float height;
+		float width;
 
 		void Update();
 		void Draw();
 
-		~Square();
+		~Rectangle();
 
 	};
 
