@@ -16,31 +16,33 @@ namespace Assignment
 
 		static const float PI_F;
 
+		int vertexCount;
+
 		Vector2D position = Vector2D(0, 0);
 		Matrix2D rotation = Matrix2D::getRotationMatrix(0);
 
 		AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0);
 
-		virtual void Update() = 0;
-		virtual void Draw() = 0;
+		virtual void Connect();
+		virtual void Globalize();
+		virtual void Draw();
 
-		virtual ~Shape() { };
+		virtual void Update() = 0;
+
+		virtual ~Shape();
 
 	};
 
-	class Polygon : public Shape
-	{
-	private:
-		int segments;
-		float radius;
+	class Circle : public Shape
+	{	
 	public:
 
-		Polygon(float x = 0.5f, float y = 0.5f, float radius = 0.25f, int segments = 8);
+		Circle(float x = 0.5f, float y = 0.5f, float radius = 0.25f, int segments = 8);
+
+		int segments;
+		float radius;
 
 		void Update();
-		void Draw();
-
-		~Polygon();
 
 	};
 
@@ -54,9 +56,6 @@ namespace Assignment
 		float width;
 
 		void Update();
-		void Draw();
-
-		~Rectangle();
 
 	};
 
@@ -66,10 +65,10 @@ namespace Assignment
 
 		Triangle(float x = 0.5f, float y = 0.5f, float base = 1, float height = 1);
 
-		void Update();
-		void Draw();
+		float base;
+		float height;
 
-		~Triangle();
+		void Update();
 
 	};
 

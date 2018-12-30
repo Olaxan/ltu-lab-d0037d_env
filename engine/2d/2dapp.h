@@ -25,6 +25,8 @@ public:
 	bool Open();
 	/// run app
 	void Run();
+	/// get current game window
+	Display::Window* GetWindow();
 
 	/// setup function, called once by open
 	virtual void Setup() = 0;
@@ -43,6 +45,10 @@ public:
 			this->r = r;
 			this->g = g;
 			this->b = b;
+		}
+		static Colour random()
+		{
+			return Colour(rand() / (RAND_MAX + 1.), rand() / (RAND_MAX + 1.), rand() / (RAND_MAX + 1.));
 		}
 		operator NVGcolor() const
 		{

@@ -32,6 +32,9 @@ namespace Assignment
 		/// destructor
 		~AssignmentApp();
 
+		/// handle keypresses
+		void KeyEvent(int key, int action, int mod);
+
 		/// initialize, create shapes etc
 		void Setup();
 
@@ -48,6 +51,8 @@ namespace Assignment
 		AssignmentApp(AssignmentApp const &);
 		/// also hidden because of the singleton
 		void operator=(AssignmentApp const &);
+		/// hidden because it's stupid
+		float randf();
 
 	};
 
