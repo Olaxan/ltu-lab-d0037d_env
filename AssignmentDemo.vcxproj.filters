@@ -3,16 +3,46 @@
   <ItemGroup>
     <ClCompile Include="projects\assignment\code\assignmentapp.cc" />
     <ClCompile Include="projects\assignment\code\main.cc" />
-    <ClCompile Include="projects\assignment\code\triangle.cpp" />
-    <ClCompile Include="projects\assignment\code\matrix2D.cpp" />
-    <ClCompile Include="projects\assignment\code\vector2D.cpp" />
-    <ClCompile Include="projects\assignment\code\shape.cpp" />
-    <ClCompile Include="projects\assignment\code\rectangle.cpp" />
-    <ClCompile Include="projects\assignment\code\circle.cpp" />
+    <ClCompile Include="projects\assignment\code\circle.cpp">
+      <Filter>Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="projects\assignment\code\triangle.cpp">
+      <Filter>Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="projects\assignment\code\shape.cpp">
+      <Filter>Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="projects\assignment\code\rectangle.cpp">
+      <Filter>Renderable</Filter>
+    </ClCompile>
+    <ClCompile Include="projects\assignment\code\vector3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="projects\assignment\code\matrix2.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="projects\assignment\code\matrix3.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="projects\assignment\code\vector2.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="projects\assignment\code\assignmentapp.h" />
-    <ClInclude Include="projects\assignment\code\shapes.h" />
-    <ClInclude Include="projects\assignment\code\matharr.h" />
+    <ClInclude Include="projects\assignment\code\shapes.h">
+      <Filter>Renderable</Filter>
+    </ClInclude>
+    <ClInclude Include="projects\assignment\code\matharr.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Renderable">
+      <UniqueIdentifier>{349078a4-8280-4964-bf3d-fd651b757043}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{f0a5b8e4-6156-4964-8a57-6048df7d06f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

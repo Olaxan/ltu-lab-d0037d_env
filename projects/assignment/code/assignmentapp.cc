@@ -24,7 +24,7 @@ namespace Assignment
 	{
 		std::random_device rd;
 		std::mt19937 eng(rd());
-		std::uniform_real_distribution<> distr(min, max);
+		std::uniform_real_distribution<double> distr(min, max);
 		return distr(eng);
 	}
 
@@ -46,7 +46,7 @@ namespace Assignment
 			{
 				if (action == 1)
 					renderQueue.push_back(new Triangle(randf(-1, 1), randf(-1, 1), randf(), randf(),
-						Matrix2D::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
+						Matrix2::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
 						Colour::random()));
 					
 				break;
@@ -55,7 +55,7 @@ namespace Assignment
 			{
 				if (action == 1)
 					renderQueue.push_back(new Rectangle(randf(-1, 1), randf(-1, 1), randf(), randf(),
-						Matrix2D::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
+						Matrix2::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
 						Colour::random()));
 					
 				break;
@@ -64,7 +64,7 @@ namespace Assignment
 			{
 				if (action == 1)
 					renderQueue.push_back(new Circle(randf(-1, 1), randf(-1, 1), randf(), 6 + rand() % 10,
-						Matrix2D::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
+						Matrix2::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
 						Colour::random()));
 					
 				break;
