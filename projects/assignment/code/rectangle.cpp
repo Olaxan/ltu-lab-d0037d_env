@@ -4,13 +4,16 @@
 
 namespace Assignment
 {
-	Rectangle::Rectangle(float x, float y, float height, float width, AssignmentApp::Colour color) : height(height), width(width)
+	Rectangle::Rectangle(float x, float y, float height, float width, Matrix2D rotation, AssignmentApp::Colour color) : height(height), width(width)
 	{
 		this->_vertices = new Vector2D[4]{ Vector2D(), Vector2D(), Vector2D(), Vector2D() };
 		this->_lines = new AssignmentApp::LineData[4];
 		this->position = Vector2D(x, y);
+		this->rotation = rotation;
 		this->color = color;
 		this->vertexCount = 4;
+
+		this->Update();
 	}
 
 	void Rectangle::Update()

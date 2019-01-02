@@ -6,7 +6,7 @@
 
 namespace Assignment
 {
-	Circle::Circle(float x, float y, float radius, int segments, AssignmentApp::Colour color)
+	Circle::Circle(float x, float y, float radius, int segments, Matrix2D rotation, AssignmentApp::Colour color)
 	{
 		this->_vertices = new Vector2D[segments];
 		this->_lines = new AssignmentApp::LineData[segments];
@@ -15,9 +15,11 @@ namespace Assignment
 			_vertices[i] = Vector2D();
 		}
 		this->position = Vector2D(x, y);
+		this->rotation = rotation;
 		this->vertexCount = segments;
 		this->radius = radius;
 		this->color = color;
+
 		this->Update();
 	}
 	void Circle::Update()

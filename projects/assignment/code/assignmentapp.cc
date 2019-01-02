@@ -45,21 +45,27 @@ namespace Assignment
 			case GLFW_KEY_1:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Triangle(randf(-1, 1), randf(-1, 1), randf(), randf(), Colour::random()));
+					renderQueue.push_back(new Triangle(randf(-1, 1), randf(-1, 1), randf(), randf(),
+						Matrix2D::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
+						Colour::random()));
 					
 				break;
 			}
 			case GLFW_KEY_2:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Rectangle(randf(-1, 1), randf(-1, 1), randf(), randf(), Colour::random()));
+					renderQueue.push_back(new Rectangle(randf(-1, 1), randf(-1, 1), randf(), randf(),
+						Matrix2D::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
+						Colour::random()));
 					
 				break;
 			}
 			case GLFW_KEY_3:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Circle(randf(-1, 1), randf(-1, 1), randf(), 6 + rand() % 10, Colour::random()));
+					renderQueue.push_back(new Circle(randf(-1, 1), randf(-1, 1), randf(), 6 + rand() % 10,
+						Matrix2D::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
+						Colour::random()));
 					
 				break;
 			}
@@ -101,9 +107,6 @@ namespace Assignment
 		for (int i = 0; i < renderQueue.size(); i++)
 		{
 			renderQueue[i]->Draw();
-			renderQueue[i]->position.y(0.25f * sin((i + 1) * 0.005f * time));
-			renderQueue[i]->rotation = Matrix2D::getRotationMatrix(0.005f * time * (1 - i));
-			renderQueue[i]->Update();
 		}
 	}
 }
