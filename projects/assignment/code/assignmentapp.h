@@ -41,6 +41,9 @@ namespace Assignment
 		/// update app, draw lines etc
 		void Update();
 
+		/// removes all objects of type from renderqueue
+		void RemoveByType(const type_info &type);
+
 		/// line drawing function
 		static void DrawLine(const LineData & line);
 
@@ -52,7 +55,8 @@ namespace Assignment
 		/// also hidden because of the singleton
 		void operator=(AssignmentApp const &);
 		/// hidden because it's stupid
-		float randf();
+		double randf();
+		double randf(double min, double max);
 
 	};
 

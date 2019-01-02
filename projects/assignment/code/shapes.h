@@ -36,8 +36,7 @@ namespace Assignment
 	class Circle : public Shape
 	{	
 	public:
-
-		Circle(float x = 0.5f, float y = 0.5f, float radius = 0.25f, int segments = 8);
+		Circle(float x = 0.5f, float y = 0.5f, float radius = 0.25f, int segments = 8, AssignmentApp::Colour color = AssignmentApp::Colour(1,0,0));
 
 		int segments;
 		float radius;
@@ -50,7 +49,7 @@ namespace Assignment
 	{
 	public:
 
-		Rectangle(float x = 0.5f, float y = 0.5f, float height = 0.25f, float width = 0.5f);
+		Rectangle(float x = 0.5f, float y = 0.5f, float height = 0.25f, float width = 0.5f, AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0));
 
 		float height;
 		float width;
@@ -63,7 +62,7 @@ namespace Assignment
 	{
 	public:
 
-		Triangle(float x = 0.5f, float y = 0.5f, float base = 1, float height = 1);
+		Triangle(float x = 0.5f, float y = 0.5f, float base = 1, float height = 1, AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0));
 
 		float base;
 		float height;

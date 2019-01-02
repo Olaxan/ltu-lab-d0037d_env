@@ -2,11 +2,12 @@
 
 namespace Assignment
 {
-	Triangle::Triangle(float x, float y, float base, float height) : base(base), height(height)
+	Triangle::Triangle(float x, float y, float base, float height, AssignmentApp::Colour color) : base(base), height(height)
 	{
 		this->_vertices = new Vector2D[3]{ Vector2D(), Vector2D(), Vector2D() };
 		this->_lines = new AssignmentApp::LineData[3];
 		this->position = Vector2D(x, y);
+		this->color = color;
 		this->vertexCount = 3;
 	}
 

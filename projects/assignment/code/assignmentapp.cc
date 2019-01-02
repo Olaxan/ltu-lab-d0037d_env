@@ -7,6 +7,8 @@
 #include "shapes.h"
 
 #include <iostream>
+#include <typeinfo>
+#include <random>
 
 namespace Assignment
 {
@@ -18,9 +20,17 @@ namespace Assignment
 		// empty
 	}
 
-	float AssignmentApp::randf()
+	double AssignmentApp::randf(double min, double max)
 	{
-		return rand() / (RAND_MAX + 1.);
+		std::random_device rd;
+		std::mt19937 eng(rd());
+		std::uniform_real_distribution<> distr(min, max);
+		return distr(eng);
+	}
+
+	double AssignmentApp::randf()
+	{
+		return randf(0, 1);
 	}
 
 	AssignmentApp::~AssignmentApp()
@@ -32,40 +42,50 @@ namespace Assignment
 	{
 		switch (key)
 		{
-			case '1':
+			case GLFW_KEY_1:
 			{
 				if (action == 1)
-				{
-					Colour c = Colour::random();
-					Triangle* t = new Triangle(randf(), randf(), randf(), randf());
-					t->color = c;
-					renderQueue.push_back(t);
-					break;
-				}
+					renderQueue.push_back(new Triangle(randf(-1, 1), randf(-1, 1), randf(), randf(), Colour::random()));
+					
+				break;
 			}
-			case '2':
+			case GLFW_KEY_2:
 			{
 				if (action == 1)
-				{
-					Colour c = Colour::random();
-					Rectangle* t = new Rectangle(randf(), randf(), randf(), randf());
-					t->color = c;
-					renderQueue.push_back(t);
-					break;
-				}
+					renderQueue.push_back(new Rectangle(randf(-1, 1), randf(-1, 1), randf(), randf(), Colour::random()));
+					
+				break;
 			}
-			case '3':
+			case GLFW_KEY_3:
 			{
 				if (action == 1)
-				{
-					Colour c = Colour::random();
-					Circle* t = new Circle(randf(), randf(), randf(), 6 + rand() % 10);
-					t->color = c;
-					renderQueue.push_back(t);
-					break;
-				}
+					renderQueue.push_back(new Circle(randf(-1, 1), randf(-1, 1), randf(), 6 + rand() % 10, Colour::random()));
+					
+				break;
+			}
+			case GLFW_KEY_Q:
+			{
+				RemoveByType(typeid(Triangle));
+				break;
+			}
+			case GLFW_KEY_W:
+			{
+				RemoveByType(typeid(Rectangle));
+				break;
+			}
+			case GLFW_KEY_E:
+			{
+				RemoveByType(typeid(Circle));
+				break;
 			}
 		}
+	}
+
+	void AssignmentApp::RemoveByType(const type_info & type)
+	{
+		std::vector<Shape*> copy;
+		std::copy_if(renderQueue.begin(), renderQueue.end(), std::back_inserter(copy), [&type](Shape* s) {return typeid(*s) != type; });
+		renderQueue = copy;
 	}
 
 	void AssignmentApp::Setup()
