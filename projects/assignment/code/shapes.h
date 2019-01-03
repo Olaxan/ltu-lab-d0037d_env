@@ -3,10 +3,11 @@
 #include "matharr.h"
 #include "config.h"
 #include "assignmentapp.h"
+#include "gameobject.h"
 
 namespace Assignment
 {
-	class Shape
+	class Shape : GameObject
 	{
 	protected:
 		Vector3* _vertices;
@@ -16,16 +17,20 @@ namespace Assignment
 	public:
 
 		static const float PI_F;
+		enum bounds { None, Wrap, Bounce };
 
 		Matrix3 transform = Matrix3();
 		Vector3 velocity = Vector3();
 
 		AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0);
 
+		int boundsMode = None;
+
 		virtual Vector3 getPosition();
 		virtual void setPosition(Vector3 pos);
 
-		virtual void Bounce(Vector3 norm);
+		virtual void Reflect(Vector3 norm);
+		virtual void Bounds(float left, float right, float bottom, float top, int mode);
 
 		virtual void Connect();
 		virtual void Globalize();

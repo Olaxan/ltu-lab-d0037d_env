@@ -86,6 +86,18 @@ namespace Assignment
 				RemoveByType(typeid(Circle));
 				break;
 			}
+			case GLFW_KEY_LEFT:
+			case GLFW_KEY_A:
+			{
+				renderQueue[0]->velocity = Vector3(-0.005, 0, 0);
+				break;
+			}
+			case GLFW_KEY_RIGHT:
+			case GLFW_KEY_D:
+			{
+				renderQueue[0]->velocity = Vector3(0.005, 0, 0);
+				break;
+			}
 		}
 	}
 
@@ -100,6 +112,9 @@ namespace Assignment
 	{
 		Display::Window* win = this->GetWindow();
 		win->SetKeyPressFunction([this](int key, int, int action, int mod) {this->KeyEvent(key, action, mod); });
+
+		renderQueue.push_back(new Rectangle(0, -0.8, 0, 0.075, 0.3));
+		renderQueue[0]->boundsMode = Shape::Wrap;
 	}
 
 	void AssignmentApp::Update()

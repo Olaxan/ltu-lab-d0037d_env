@@ -17,8 +17,6 @@ namespace Assignment
 
 	void Rectangle::Update()
 	{
-		this->UpdatePosition();
-
 		float halfHeight = height / 2;
 		float halfWidth = width / 2;
 
@@ -34,6 +32,8 @@ namespace Assignment
 		_vertices[3].x(-halfWidth);
 		_vertices[3].y(halfHeight);
 
+		this->Bounds(-1, 1, -1, 1, boundsMode);
+		this->UpdatePosition();
 		this->Globalize();
 		this->Connect();
 

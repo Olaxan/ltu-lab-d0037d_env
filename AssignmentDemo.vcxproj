@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gameobject.cpp" />
     <ClCompile Include="projects\assignment\code\assignmentapp.cc" />
     <ClCompile Include="projects\assignment\code\circle.cpp" />
     <ClCompile Include="projects\assignment\code\main.cc" />
@@ -138,6 +139,7 @@
     <ClCompile Include="projects\assignment\code\vector3.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gameobject.h" />
     <ClInclude Include="projects\assignment\code\assignmentapp.h" />
     <ClInclude Include="projects\assignment\code\matharr.h" />
     <ClInclude Include="projects\assignment\code\shapes.h" />

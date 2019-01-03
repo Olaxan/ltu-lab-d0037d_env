@@ -24,8 +24,6 @@ namespace Assignment
 
 	void Circle::Update()
 	{
-		this->UpdatePosition();
-
 		float delta = (2 * Shape::PI_F) / vertexCount;
 
 		for (int i = 0; i < vertexCount; i++)
@@ -34,6 +32,8 @@ namespace Assignment
 			_vertices[i].y(sin(i * delta) * radius);
 		}
 
+		this->Bounds(-1, 1, -1, 1, boundsMode);
+		this->UpdatePosition();
 		this->Globalize();
 		this->Connect();
 	}

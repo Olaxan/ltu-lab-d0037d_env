@@ -27,6 +27,7 @@
     <ClCompile Include="projects\assignment\code\vector2.cpp">
       <Filter>Math</Filter>
     </ClCompile>
+    <ClCompile Include="gameobject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="projects\assignment\code\assignmentapp.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="projects\assignment\code\matharr.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="gameobject.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Renderable">

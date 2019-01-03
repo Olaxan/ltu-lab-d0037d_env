@@ -17,8 +17,6 @@ namespace Assignment
 
 	void Triangle::Update()
 	{
-		this->UpdatePosition();
-
 		float halfHeight = height / 2;
 		float halfWidth = base / 2;
 
@@ -31,6 +29,8 @@ namespace Assignment
 		_vertices[2].x(-halfWidth);
 		_vertices[2].y(halfHeight);
 
+		this->Bounds(-1, 1, -1, 1, boundsMode);
+		this->UpdatePosition();
 		this->Globalize();
 		this->Connect();
 	}
