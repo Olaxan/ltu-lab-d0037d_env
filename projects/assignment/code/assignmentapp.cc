@@ -45,27 +45,21 @@ namespace Assignment
 			case GLFW_KEY_1:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Triangle(randf(-1, 1), randf(-1, 1), randf(), randf(),
-						Matrix2::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
-						Colour::random()));
+					renderQueue.push_back(new Triangle(randf(-1, 1), randf(-1, 1), randf(0, 2 * Shape::PI_F), randf(), randf(), Colour::random()));
 					
 				break;
 			}
 			case GLFW_KEY_2:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Rectangle(randf(-1, 1), randf(-1, 1), randf(), randf(),
-						Matrix2::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
-						Colour::random()));
+					renderQueue.push_back(new Rectangle(randf(-1, 1), randf(-1, 1), randf(0, 2 * Shape::PI_F), randf(), randf(), Colour::random()));
 					
 				break;
 			}
 			case GLFW_KEY_3:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Circle(randf(-1, 1), randf(-1, 1), randf(), 6 + rand() % 10,
-						Matrix2::getRotationMatrix(randf(0, 2 * Shape::PI_F)),
-						Colour::random()));
+					renderQueue.push_back(new Circle(randf(-1, 1), randf(-1, 1), randf(0, 2 * Shape::PI_F), randf(), 6 + rand() % 10, Colour::random()));
 					
 				break;
 			}
@@ -98,10 +92,6 @@ namespace Assignment
 	{
 		Display::Window* win = this->GetWindow();
 		win->SetKeyPressFunction([this](int key, int, int action, int mod) {this->KeyEvent(key, action, mod); });
-
-		Matrix3 mat1 = Matrix3(Vector3(1, 2, 3), Vector3(4, 5, 6), Vector3(7, 8, 9));
-		Vector3 vec1 = Vector3(5, 6, 7);
-		std::cout << (mat1 * vec1).to_string();
 	}
 
 	void AssignmentApp::Update()

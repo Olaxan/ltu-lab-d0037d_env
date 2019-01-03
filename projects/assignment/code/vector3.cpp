@@ -2,6 +2,10 @@
 
 #include <cmath>
 
+#ifdef _DEBUG
+#include <iostream>
+#endif
+
 //Hash
 namespace std
 {
@@ -22,6 +26,7 @@ namespace std
 
 namespace Assignment
 {
+
 	Vector3::Vector3(const Vector2 &copy)
 	{
 		this->x(copy.x());
@@ -68,9 +73,9 @@ namespace Assignment
 		return vect;
 	}
 
-	Vector3& Vector3::operator*=(const Matrix3 & other)
+	Vector3& Vector3::operator *= (const Matrix3 & other)
 	{
-		other *= (*this);
+		(*this) = other * (*this);
 		return *this;
 	}
 

@@ -1,7 +1,6 @@
 #include "matharr.h"
 
 #include <sstream>
-#include <iostream>
 
 namespace Assignment
 {
@@ -135,11 +134,12 @@ namespace Assignment
 		return mat;
 	}
 
-	Matrix3 Matrix3::getTranslation(const Vector2 & v)
+	Matrix3 Matrix3::getTranslation(const Vector3 & v)
 	{
 		Matrix3 mat = Matrix3();
 		mat(2, 0) = v.x();
 		mat(2, 1) = v.y();
+		mat(2, 2) = v.z();
 		return mat;
 	}
 

@@ -54,9 +54,11 @@ namespace Assignment
 		float _arr[3];
 
 	public:
+		Vector3(float x = 0, float y = 0, float z = 0);
+		Vector3(bool homogenous) : Vector3(0, 0, homogenous) { }
 		Vector3(const Vector2 &copy);
 		Vector3(const Vector3 &copy);
-		Vector3(float x = 0, float y = 0, float z = 0);
+		
 
 		Vector3& operator += (const Vector3 &other);
 		Vector3& operator -= (const Vector3 &other);
@@ -167,7 +169,7 @@ namespace Assignment
 		void clear(bool identity = true);
 
 		Matrix3 getTransposed() const;
-		static Matrix3 getTranslation(const Vector2 &v);
+		static Matrix3 getTranslation(const Vector3 &v);
 		static Matrix3 getRotationMatrix(const float &rad);
 
 		std::string to_string();

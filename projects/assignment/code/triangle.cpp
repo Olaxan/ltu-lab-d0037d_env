@@ -1,13 +1,14 @@
 #include "shapes.h"
 
+#include <iostream>
+
 namespace Assignment
 {
-	Triangle::Triangle(float x, float y, float base, float height, Matrix2 rotation, AssignmentApp::Colour color) : base(base), height(height)
+	Triangle::Triangle(float x, float y, float r, float base, float height, AssignmentApp::Colour color) : base(base), height(height)
 	{
-		this->_vertices = new Vector2[3]{ Vector2(), Vector2(), Vector2() };
+		this->_vertices = new Vector3[3]{ Vector3(true), Vector3(true), Vector3(true) };
 		this->_lines = new AssignmentApp::LineData[3];
-		this->position = Vector2(x, y);
-		this->rotation = rotation;
+		this->transform = Matrix3::getRotationMatrix(r) * Matrix3::getTranslation(Vector3(x, y, 1));
 		this->color = color;
 		this->vertexCount = 3;
 

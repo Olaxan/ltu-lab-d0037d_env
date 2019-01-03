@@ -4,12 +4,11 @@
 
 namespace Assignment
 {
-	Rectangle::Rectangle(float x, float y, float height, float width, Matrix2 rotation, AssignmentApp::Colour color) : height(height), width(width)
+	Rectangle::Rectangle(float x, float y, float r, float height, float width, AssignmentApp::Colour color) : height(height), width(width)
 	{
-		this->_vertices = new Vector2[4]{ Vector2(), Vector2(), Vector2(), Vector2() };
+		this->_vertices = new Vector3[4]{ Vector3(true), Vector3(true), Vector3(true), Vector3(true) };
 		this->_lines = new AssignmentApp::LineData[4];
-		this->position = Vector2(x, y);
-		this->rotation = rotation;
+		this->transform = Matrix3::getRotationMatrix(r) * Matrix3::getTranslation(Vector3(x, y, 1));
 		this->color = color;
 		this->vertexCount = 4;
 

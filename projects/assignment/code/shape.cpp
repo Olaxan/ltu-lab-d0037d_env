@@ -1,5 +1,7 @@
 #include "shapes.h"
 
+#include <iostream>
+
 namespace Assignment
 {
 	const float Shape::PI_F = 3.14159265358979f;
@@ -29,8 +31,7 @@ namespace Assignment
 	{
 		for (int i = 0; i < vertexCount; i++)
 		{
-			_vertices[i] *= rotation;
-			_vertices[i] += position;
+			_vertices[i] *= transform;
 		}
 	}
 

@@ -9,7 +9,7 @@ namespace Assignment
 	class Shape
 	{
 	protected:
-		Vector2* _vertices;
+		Vector3* _vertices;
 		AssignmentApp::LineData* _lines;
 
 	public:
@@ -18,8 +18,7 @@ namespace Assignment
 
 		int vertexCount;
 
-		Vector2 position = Vector2(0, 0);
-		Matrix2 rotation = Matrix2::getRotationMatrix(0);
+		Matrix3 transform = Matrix3();
 
 		AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0);
 
@@ -36,8 +35,7 @@ namespace Assignment
 	class Circle : public Shape
 	{	
 	public:
-		Circle(float x = 0.5f, float y = 0.5f, float radius = 0.25f, int segments = 8,
-			Matrix2 rotation = Matrix2::getRotationMatrix(0), 
+		Circle(float x = 0.5f, float y = 0.5f, float r = 0, float radius = 0.25f, int segments = 8,
 			AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0));
 
 		int segments;
@@ -51,8 +49,7 @@ namespace Assignment
 	{
 	public:
 
-		Rectangle(float x = 0.5f, float y = 0.5f, float height = 0.25f, float width = 0.5f,
-			Matrix2 rotation = Matrix2::getRotationMatrix(0),
+		Rectangle(float x = 0.5f, float y = 0.5f, float r = 0, float height = 0.25f, float width = 0.5f,
 			AssignmentApp::Colour color = AssignmentApp::Colour(0, 1, 0));
 
 		float height;
@@ -66,8 +63,7 @@ namespace Assignment
 	{
 	public:
 
-		Triangle(float x = 0.5f, float y = 0.5f, float base = 1, float height = 1,
-			Matrix2 rotation = Matrix2::getRotationMatrix(0),
+		Triangle(float x = 0.5f, float y = 0.5f, float r = 0, float base = 1, float height = 1,
 			AssignmentApp::Colour color = AssignmentApp::Colour(0, 0, 1));
 
 		float base;

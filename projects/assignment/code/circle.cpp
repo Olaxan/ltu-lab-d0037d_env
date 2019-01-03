@@ -6,22 +6,22 @@
 
 namespace Assignment
 {
-	Circle::Circle(float x, float y, float radius, int segments, Matrix2 rotation, AssignmentApp::Colour color)
+	Circle::Circle(float x, float y, float r, float radius, int segments, AssignmentApp::Colour color)
 	{
-		this->_vertices = new Vector2[segments];
+		this->_vertices = new Vector3[segments];
 		this->_lines = new AssignmentApp::LineData[segments];
 		for (int i = 0; i < segments; i++)
 		{
-			_vertices[i] = Vector2();
+			_vertices[i] = Vector3(true);
 		}
-		this->position = Vector2(x, y);
-		this->rotation = rotation;
+		this->transform = Matrix3::getRotationMatrix(r) * Matrix3::getTranslation(Vector3(x, y, 1));
 		this->vertexCount = segments;
 		this->radius = radius;
 		this->color = color;
 
 		this->Update();
 	}
+
 	void Circle::Update()
 	{
 		float delta = (2 * Shape::PI_F) / vertexCount;
