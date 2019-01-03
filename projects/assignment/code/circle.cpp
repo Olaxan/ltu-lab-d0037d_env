@@ -24,6 +24,8 @@ namespace Assignment
 
 	void Circle::Update()
 	{
+		this->UpdatePosition();
+
 		float delta = (2 * Shape::PI_F) / vertexCount;
 
 		for (int i = 0; i < vertexCount; i++)

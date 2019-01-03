@@ -92,6 +92,11 @@ namespace Assignment
 		return _arr[y][x];
 	}
 
+	float Matrix3::at(int n) const
+	{
+		return at(n / 3, n % 3);
+	}
+
 	float Matrix3::at(int x, int y) const
 	{
 		return _arr[y].at(x);

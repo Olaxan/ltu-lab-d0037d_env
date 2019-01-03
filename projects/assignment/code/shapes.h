@@ -11,22 +11,28 @@ namespace Assignment
 	protected:
 		Vector3* _vertices;
 		AssignmentApp::LineData* _lines;
+		int vertexCount;
 
 	public:
 
 		static const float PI_F;
 
-		int vertexCount;
-
 		Matrix3 transform = Matrix3();
+		Vector3 velocity = Vector3();
 
 		AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0);
+
+		virtual Vector3 getPosition();
+		virtual void setPosition(Vector3 pos);
+
+		virtual void Bounce(Vector3 norm);
 
 		virtual void Connect();
 		virtual void Globalize();
 		virtual void Draw();
 
 		virtual void Update() = 0;
+		virtual void UpdatePosition();
 
 		virtual ~Shape();
 

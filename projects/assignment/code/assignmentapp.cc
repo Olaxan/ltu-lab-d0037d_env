@@ -63,6 +63,14 @@ namespace Assignment
 					
 				break;
 			}
+			case GLFW_KEY_4:
+			{
+				Shape* c = new Circle(0, 0, 0, 0.05, 8, Colour::random());
+				c->velocity = Vector3(randf(-0.005, 0.005), randf(-0.005, 0.005), 0);
+				renderQueue.push_back(c);
+
+				break;
+			}
 			case GLFW_KEY_Q:
 			{
 				RemoveByType(typeid(Triangle));
@@ -100,6 +108,7 @@ namespace Assignment
 
 		for (int i = 0; i < renderQueue.size(); i++)
 		{
+			renderQueue[i]->Update();
 			renderQueue[i]->Draw();
 		}
 	}

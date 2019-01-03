@@ -15,10 +15,13 @@ namespace Assignment
 
 		Vector2& operator += (const Vector2 &other);
 		Vector2& operator -= (const Vector2 &other);
+		Vector2& operator *= (const Vector2 &other);
+		Vector2& operator *= (const float &other);
 
 		Vector2 operator + (const Vector2 &other) const;
 		Vector2 operator - (const Vector2 &other) const;
 		Vector2 operator * (const Vector2 &other) const;
+		Vector2 operator * (const float &other) const;
 
 		Vector2& operator *= (const Matrix2 &other);
 
@@ -41,6 +44,7 @@ namespace Assignment
 
 		/// Performs a matrix transformation on the Vector2 and returns the result.
 		Vector2 getTransformed(const Matrix2 &trans) const;
+		Vector2 getReflection(const Vector2 &normal) const;
 
 		std::string to_string() const;
 
@@ -62,10 +66,13 @@ namespace Assignment
 
 		Vector3& operator += (const Vector3 &other);
 		Vector3& operator -= (const Vector3 &other);
+		Vector3& operator *= (const Vector3 &other);
+		Vector3& operator *= (const float &other);
 
 		Vector3 operator + (const Vector3 &other) const;
 		Vector3 operator - (const Vector3 &other) const;
 		Vector3 operator * (const Vector3 &other) const;
+		Vector3 operator * (const float &other) const;
 
 		Vector3& operator *= (const Matrix3 &other);
 
@@ -89,7 +96,8 @@ namespace Assignment
 		float dot(const Vector3 &other) const;
 		float norm() const;
 
-		Vector3 getTransformed(const Matrix3 & trans) const;
+		Vector3 getTransformed(const Matrix3 &trans) const;
+		Vector3 getReflection(const Vector3 &normal) const;
 
 		std::string to_string() const;
 
@@ -110,8 +118,10 @@ namespace Assignment
 		Vector2& operator *= (Vector2 &other) const;
 		Vector2 operator * (const Vector2 &other) const;
 
+		float& operator () (int n);
 		float& operator () (int x, int y);
 
+		float at(int n) const;
 		float at(int x, int y) const;
 
 		Vector2 row(int y) const;
@@ -161,6 +171,7 @@ namespace Assignment
 		float& operator () (int i);
 		float& operator () (int x, int y);
 
+		float at(int n) const;
 		float at(int x, int y) const;
 
 		Vector3 row(int y) const;

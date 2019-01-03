@@ -54,9 +54,19 @@ namespace Assignment
 		return vect;
 	}
 
+	float & Matrix2::operator()(int n)
+	{
+		return _arr[n / 2][n % 2];
+	}
+
 	float & Matrix2::operator()(int x, int y)
 	{
 		return _arr[y][x];
+	}
+
+	float Matrix2::at(int n) const
+	{
+		return at(n / 2, n % 2);
 	}
 
 	float Matrix2::at(int x, int y) const

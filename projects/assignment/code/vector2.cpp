@@ -49,6 +49,18 @@ namespace Assignment
 		return *this;
 	}
 
+	Vector2 & Vector2::operator*=(const Vector2 & other)
+	{
+		*this = (*this) * other;
+		return *this;
+	}
+
+	Vector2 & Vector2::operator*=(const float & other)
+	{
+		*this = (*this) * other;
+		return *this;
+	}
+
 	Vector2 Vector2::operator + (const Vector2& other) const
 	{
 		Vector2 vect;
@@ -70,6 +82,14 @@ namespace Assignment
 		Vector2 vect;
 		vect.x(this->x() * other.x());
 		vect.y(this->y() * other.y());
+		return vect;
+	}
+
+	Vector2 Vector2::operator*(const float & other) const
+	{
+		Vector2 vect;
+		vect.x(this->x() * other);
+		vect.y(this->y() * other);
 		return vect;
 	}
 
@@ -123,6 +143,11 @@ namespace Assignment
 	Vector2 Vector2::getTransformed(const Matrix2 &trans) const
 	{
 		return Vector2(trans * (*this));
+	}
+
+	Vector2 Vector2::getReflection(const Vector2 &normal) const
+	{
+		return (*this) - (normal - (*this)) * normal * 2;
 	}
 
 	std::string Vector2::to_string() const

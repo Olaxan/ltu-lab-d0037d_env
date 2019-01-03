@@ -17,6 +17,7 @@ namespace Assignment
 
 	void Rectangle::Update()
 	{
+		this->UpdatePosition();
 
 		float halfHeight = height / 2;
 		float halfWidth = width / 2;

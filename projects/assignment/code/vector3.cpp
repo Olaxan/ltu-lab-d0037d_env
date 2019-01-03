@@ -73,6 +73,15 @@ namespace Assignment
 		return vect;
 	}
 
+	Vector3 Vector3::operator*(const float & other) const
+	{
+		Vector3 vect;
+		vect.x(this->x() * other);
+		vect.y(this->y() * other);
+		vect.z(this->z() * other);
+		return vect;
+	}
+
 	Vector3& Vector3::operator *= (const Matrix3 & other)
 	{
 		(*this) = other * (*this);
@@ -88,6 +97,18 @@ namespace Assignment
 	Vector3& Vector3::operator -= (const Vector3 & other)
 	{
 		(*this) = (*this) - other;
+		return *this;
+	}
+
+	Vector3 & Vector3::operator*=(const Vector3 & other)
+	{
+		*this = (*this) * other;
+		return *this;
+	}
+
+	Vector3 & Vector3::operator*=(const float & other)
+	{
+		*this = (*this) * other;
 		return *this;
 	}
 
@@ -135,6 +156,12 @@ namespace Assignment
 	Vector3 Vector3::getTransformed(const Matrix3 &trans) const
 	{
 		return Vector3(trans * (*this));
+	}
+
+	Vector3 Vector3::getReflection(const Vector3 & normal) const
+	{
+		Vector3 unit = normal * (1 / normal.norm());
+		return (*this) - unit * 2 * dot(unit);
 	}
 
 	std::string Vector3::to_string() const

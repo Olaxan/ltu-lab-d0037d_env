@@ -6,6 +6,23 @@ namespace Assignment
 {
 	const float Shape::PI_F = 3.14159265358979f;
 
+	void Shape::setPosition(Vector3 pos)
+	{
+		this->transform(2, 0) = pos.x();
+		this->transform(2, 1) = pos.y();
+		this->transform(2, 2) = pos.z();
+	}
+
+	void Shape::Bounce(Vector3 norm)
+	{
+		velocity = velocity.getReflection(norm);
+	}
+
+	Vector3 Shape::getPosition()
+	{
+		return Vector3(transform(2, 0), transform(2, 1), transform(2, 2));
+	}
+
 	void Shape::Connect()
 	{
 
@@ -41,6 +58,38 @@ namespace Assignment
 		{
 			AssignmentApp::DrawLine(_lines[i]);
 		}
+	}
+
+	void Shape::UpdatePosition()
+	{
+		Vector3 pos = this->getPosition();
+
+		if (pos.x() + velocity.x() > 1)
+		{
+			pos.x(1);
+			Bounce(Vector3(-1, 0, 0));
+		}
+
+		else if (pos.x() + velocity.x() < -1)
+		{
+			pos.x(-1);
+			Bounce(Vector3(1, 0, 0));
+		}
+
+		if (pos.y() + velocity.y() > 1)
+		{
+			pos.y(1);
+			Bounce(Vector3(0, -1, 0));
+		}
+
+		else if (pos.y() + velocity.y() < -1)
+		{
+			pos.y(-1);
+			Bounce(Vector3(0, 1, 0));
+		}
+
+		pos += velocity;
+		this->setPosition(pos);
 	}
 
 	Shape::~Shape()

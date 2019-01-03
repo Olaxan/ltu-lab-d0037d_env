@@ -17,6 +17,7 @@ namespace Assignment
 
 	void Triangle::Update()
 	{
+		this->UpdatePosition();
 
 		float halfHeight = height / 2;
 		float halfWidth = base / 2;
