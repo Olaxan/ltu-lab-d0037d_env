@@ -98,6 +98,10 @@ namespace Assignment
 	{
 		Display::Window* win = this->GetWindow();
 		win->SetKeyPressFunction([this](int key, int, int action, int mod) {this->KeyEvent(key, action, mod); });
+
+		Matrix3 mat1 = Matrix3(Vector3(1, 2, 3), Vector3(4, 5, 6), Vector3(7, 8, 9));
+		Vector3 vec1 = Vector3(5, 6, 7);
+		std::cout << (mat1 * vec1).to_string();
 	}
 
 	void AssignmentApp::Update()
