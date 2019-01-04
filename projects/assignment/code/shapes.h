@@ -3,11 +3,10 @@
 #include "matharr.h"
 #include "config.h"
 #include "assignmentapp.h"
-#include "gameobject.h"
 
 namespace Assignment
 {
-	class Shape : GameObject
+	class Shape
 	{
 	protected:
 		Vector3* _vertices;
@@ -25,6 +24,7 @@ namespace Assignment
 		AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0);
 
 		int boundsMode = None;
+		bool solid = false;
 
 		virtual Vector3 getPosition();
 		virtual void setPosition(Vector3 pos);

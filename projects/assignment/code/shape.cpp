@@ -6,6 +6,11 @@ namespace Assignment
 {
 	const float Shape::PI_F = 3.14159265358979f;
 
+	Vector3 Shape::getPosition()
+	{
+		return Vector3(transform(2, 0), transform(2, 1), transform(2, 2));
+	}
+
 	void Shape::setPosition(Vector3 pos)
 	{
 		this->transform(2, 0) = pos.x();
@@ -68,11 +73,6 @@ namespace Assignment
 		}
 
 		setPosition(pos);
-	}
-
-	Vector3 Shape::getPosition()
-	{
-		return Vector3(transform(2, 0), transform(2, 1), transform(2, 2));
 	}
 
 	void Shape::Connect()

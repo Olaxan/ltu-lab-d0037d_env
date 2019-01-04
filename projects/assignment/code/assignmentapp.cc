@@ -67,6 +67,7 @@ namespace Assignment
 			{
 				Shape* c = new Circle(0, 0, 0, 0.05, 8, Colour::random());
 				c->velocity = Vector3(randf(-0.005, 0.005), randf(-0.005, 0.005), 0);
+				c->boundsMode = Shape::Bounce;
 				renderQueue.push_back(c);
 
 				break;
