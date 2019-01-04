@@ -138,6 +138,11 @@ namespace Assignment
 		return (std::hash<Vector3>()(*this) != std::hash<Vector3>()(other));
 	}
 
+	float Vector3::dist(const Vector3 & x, const Vector3 & y)
+	{
+		return (x - y).length();
+	}
+
 	float Vector3::dot(const Vector3 & x, const Vector3 & y)
 	{
 		return x.dot(y);
@@ -148,9 +153,15 @@ namespace Assignment
 		return (this->x() * other.x() + this->y() * other.y() + this->z() * other.z());
 	}
 
-	float Vector3::norm() const
+	float Vector3::length() const
 	{
 		return sqrt(powf(this->x(), 2) + powf(this->y(), 2) + powf(this->z(), 2));
+	}
+
+	Vector3 Vector3::norm() const
+	{
+		Vector3 v = (*this);
+		return v * (1 / v.length());
 	}
 
 	Vector3 Vector3::getTransformed(const Matrix3 &trans) const
@@ -160,7 +171,7 @@ namespace Assignment
 
 	Vector3 Vector3::getReflection(const Vector3 & normal) const
 	{
-		Vector3 unit = normal * (1 / normal.norm());
+		Vector3 unit = normal * (1 / normal.length());
 		return (*this) - unit * 2 * dot(unit);
 	}
 

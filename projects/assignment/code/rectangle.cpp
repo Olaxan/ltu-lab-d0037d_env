@@ -10,6 +10,11 @@ namespace Assignment
 		this->Update();
 	}
 
+	float Rectangle::GetNarrowPhysicsDistance()
+	{
+		return sqrt(pow(width / 2, 2) + pow(height/2, 2)) * 1.1;
+	}
+
 	void Rectangle::Update()
 	{
 		float halfHeight = height / 2;
@@ -28,7 +33,7 @@ namespace Assignment
 		_vertices[3].y(halfHeight);
 
 		this->Bounds(-1, 1, -1, 1, boundsMode);
-		this->UpdatePosition();
+		this->StepForward();
 		this->Globalize();
 		this->Connect();
 

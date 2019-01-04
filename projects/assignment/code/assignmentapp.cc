@@ -35,7 +35,7 @@ namespace Assignment
 
 	AssignmentApp::~AssignmentApp()
 	{
-		renderQueue.clear();
+		gameShapes.clear();
 	}
 
 	void AssignmentApp::KeyEvent(int key, int action, int mod)
@@ -45,31 +45,46 @@ namespace Assignment
 			case GLFW_KEY_1:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Triangle(randf(-1, 1), randf(-1, 1), randf(0, 2 * Shape::PI_F), randf(), randf(), Colour::random()));
+				{
+					Shape* c = new Triangle(randf(-1, 1), randf(-1, 1), randf(0, Shape::PI_F * 2), randf(0.05, 0.3), randf(0.05, 0.1), Colour::random());
+					c->velocity = Vector3(0.002, 0.002, 0);
+					c->boundsMode = Shape::bndBounce;
+					c->solid = true;
+					gameShapes.push_back(c);
+
+					break;
+				}
 					
 				break;
 			}
 			case GLFW_KEY_2:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Rectangle(randf(-1, 1), randf(-1, 1), randf(0, 2 * Shape::PI_F), randf(), randf(), Colour::random()));
+				{
+					Shape* c = new Rectangle(randf(-1, 1), randf(-1, 1), randf(0, Shape::PI_F * 2), randf(0.05, 0.3), randf(0.05, 0.1), Colour::random());
+					c->velocity = Vector3(0.002, 0.002, 0);
+					c->boundsMode = Shape::bndBounce;
+					c->solid = true;
+					gameShapes.push_back(c);
+
+					break;
+				}
 					
 				break;
 			}
 			case GLFW_KEY_3:
 			{
 				if (action == 1)
-					renderQueue.push_back(new Circle(randf(-1, 1), randf(-1, 1), randf(0, 2 * Shape::PI_F), randf(), 6 + rand() % 10, Colour::random()));
-					
-				break;
-			}
-			case GLFW_KEY_4:
-			{
-				Shape* c = new Circle(0, 0, 0, 0.05, 8, Colour::random());
-				c->velocity = Vector3(randf(-0.005, 0.005), randf(-0.005, 0.005), 0);
-				c->boundsMode = Shape::Bounce;
-				renderQueue.push_back(c);
+				{
+					Shape* c = new Circle(randf(-1, 1), randf(-1, 1), randf(0, Shape::PI_F * 2), randf(0.05, 0.3), 8, Colour::random());
+					c->velocity = Vector3(0.002, 0.002, 0);
+					c->boundsMode = Shape::bndBounce;
+					c->solid = true;
+					gameShapes.push_back(c);
 
+					break;
+				}
+					
 				break;
 			}
 			case GLFW_KEY_Q:
@@ -87,16 +102,16 @@ namespace Assignment
 				RemoveByType(typeid(Circle));
 				break;
 			}
-			case GLFW_KEY_LEFT:
 			case GLFW_KEY_A:
+			case GLFW_KEY_LEFT:
 			{
-				renderQueue[0]->velocity = Vector3(-0.005, 0, 0);
+				gameShapes[0]->velocity = Vector3(-0.005, 0, 0);
 				break;
 			}
-			case GLFW_KEY_RIGHT:
 			case GLFW_KEY_D:
+			case GLFW_KEY_RIGHT:
 			{
-				renderQueue[0]->velocity = Vector3(0.005, 0, 0);
+				gameShapes[0]->velocity = Vector3(0.005, 0, 0);
 				break;
 			}
 		}
@@ -105,27 +120,42 @@ namespace Assignment
 	void AssignmentApp::RemoveByType(const type_info & type)
 	{
 		std::vector<Shape*> copy;
-		std::copy_if(renderQueue.begin(), renderQueue.end(), std::back_inserter(copy), [&type](Shape* s) {return typeid(*s) != type; });
-		renderQueue = copy;
+		std::copy_if(gameShapes.begin(), gameShapes.end(), std::back_inserter(copy), [&type](Shape* s) {return typeid(*s) != type; });
+		gameShapes = copy;
 	}
 
 	void AssignmentApp::Setup()
 	{
 		Display::Window* win = this->GetWindow();
 		win->SetKeyPressFunction([this](int key, int, int action, int mod) {this->KeyEvent(key, action, mod); });
-
-		renderQueue.push_back(new Rectangle(0, -0.8, 0, 0.075, 0.3));
-		renderQueue[0]->boundsMode = Shape::Wrap;
 	}
 
 	void AssignmentApp::Update()
 	{
 		time++;
 
-		for (int i = 0; i < renderQueue.size(); i++)
+		//std::cout << "\rTime: " << time;
+
+		Shape* obj;
+		Shape* other;
+
+		for (int i = 0; i < gameShapes.size(); i++)
 		{
-			renderQueue[i]->Update();
-			renderQueue[i]->Draw();
+			obj = gameShapes[i];
+
+			for (int j = 0; j < gameShapes.size(); j++)
+			{
+				other = gameShapes[j];
+
+				if (i == j)
+					continue;
+
+				if (obj->solid && other->solid && obj->Intersect(other, true))
+					obj->Bounce(other);
+			}
+
+			obj->Update();
+			obj->Draw();
 		}
 	}
 }

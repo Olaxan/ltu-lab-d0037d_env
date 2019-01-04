@@ -125,6 +125,11 @@ namespace Assignment
 		return (std::hash<Vector2>()(*this) != std::hash<Vector2>()(other));
 	}
 
+	float Vector2::dist(const Vector2 & x, const Vector2 & y)
+	{
+		return (x - y).length();
+	}
+
 	float Vector2::dot(const Vector2 & x, const Vector2 & y)
 	{
 		return x.dot(y);
@@ -135,9 +140,15 @@ namespace Assignment
 		return (this->x() * other.x() + this->y() * other.y());
 	}
 
-	float Vector2::norm() const
+	float Vector2::length() const
 	{
 		return sqrt(powf(this->x(), 2) + powf(this->y(), 2));
+	}
+
+	Vector2 Vector2::norm() const
+	{
+		Vector2 v = (*this);
+		return v * (1 / v.length());
 	}
 
 	Vector2 Vector2::getTransformed(const Matrix2 &trans) const

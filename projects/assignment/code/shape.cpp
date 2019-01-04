@@ -6,12 +6,12 @@ namespace Assignment
 {
 	const float Shape::PI_F = 3.14159265358979f;
 
-	Vector3 Shape::getPosition()
+	Vector3 Shape::GetPosition()
 	{
 		return Vector3(transform(2, 0), transform(2, 1), transform(2, 2));
 	}
 
-	void Shape::setPosition(Vector3 pos)
+	void Shape::SetPosition(Vector3 pos)
 	{
 		this->transform(2, 0) = pos.x();
 		this->transform(2, 1) = pos.y();
@@ -23,16 +23,28 @@ namespace Assignment
 		velocity = velocity.getReflection(norm);
 	}
 
+	void Shape::Bounce(Shape* obj)
+	{
+		Vector3 norm = (obj->GetPosition() - GetPosition()).norm();
+
+		if (!rigid)
+			Reflect(norm);
+
+		if (!obj->rigid)
+			obj->Reflect(norm * -1);
+
+	}
+
 	void Shape::Bounds(float left, float right, float bottom, float top, int mode)
 	{
-		if (mode == None)
+		if (mode == bndNone)
 			return;
 
-		Vector3 pos = getPosition();
+		Vector3 pos = GetPosition();
 
 		if (pos.x() + velocity.x() < left)
 		{
-			if (mode == Wrap)
+			if (mode == bndWrap)
 				pos.x(right);
 			else
 			{
@@ -42,7 +54,7 @@ namespace Assignment
 		}
 		else if (pos.x() + velocity.x() > right)
 		{
-			if (mode == Wrap)
+			if (mode == bndWrap)
 				pos.x(left);
 			else
 			{
@@ -53,7 +65,7 @@ namespace Assignment
 
 		if (pos.y() + velocity.y() < bottom)
 		{
-			if (mode == Wrap)
+			if (mode == bndWrap)
 				pos.y(top);
 			else
 			{
@@ -63,7 +75,7 @@ namespace Assignment
 		}
 		else if (pos.y() + velocity.y() > top)
 		{
-			if (mode == Wrap)
+			if (mode == bndWrap)
 				pos.y(bottom);
 			else
 			{
@@ -72,10 +84,10 @@ namespace Assignment
 			}
 		}
 
-		setPosition(pos);
+		SetPosition(pos);
 	}
 
-	void Shape::PreCalc()
+	void Shape::PrecalcVertexBounds()
 	{
 		int i;
 		int j = vertexCount - 1;
@@ -97,7 +109,7 @@ namespace Assignment
 		}
 	}
 
-	bool Shape::PointInside(float x, float y)
+	bool Shape::PointInside(const Vector3& point)
 	{
 		int i;
 		int j = vertexCount - 1;
@@ -105,9 +117,9 @@ namespace Assignment
 
 		for (i = 0; i < vertexCount; i++)
 		{
-			if ((_vertices[i].y() < y && _vertices[j].y() >= y || _vertices[j].y() < y && _vertices[i].y() >= y))
+			if ((_vertices[i].y() < point.y() && _vertices[j].y() >= point.y() || _vertices[j].y() < point.y() && _vertices[i].y() >= point.y()))
 			{
-				oddNodes ^= (y*_multiple[i] + _constant[i] < x);
+				oddNodes ^= (point.y() * _multiple[i] + _constant[i] < point.x());
 			}
 
 			j = i;
@@ -116,15 +128,24 @@ namespace Assignment
 		return oddNodes;
 	}
 
-	bool Shape::Intersect(Shape * obj)
+	bool Shape::Intersect(Shape * obj, bool nextStep)
 	{
-		PreCalc();
+		PrecalcVertexBounds();
 
-		for (int i = 0; i < obj->vertexCount; i++)
+		if (nextStep)
+			StepForward();
+
+		if (Vector3::dist(GetPosition(), obj->GetPosition()) < GetNarrowPhysicsDistance() + obj->GetNarrowPhysicsDistance())
 		{
-			if (PointInside(obj->_vertices[i].x(), obj->_vertices[i].y()))
-				return true;
+			for (int i = 0; i < obj->vertexCount; i++)
+			{
+				if (this->PointInside(obj->_vertices[i]))
+					return true;
+			}
 		}
+
+		if (nextStep)
+			StepBackward();
 
 		return false;
 	}
@@ -176,14 +197,29 @@ namespace Assignment
 		{
 			_vertices[i] = Vector3(true);
 		}
-		this->transform = Matrix3::getRotationMatrix(r) * Matrix3::getTranslation(Vector3(x, y, 1));
+		this->transform = Matrix3::getTranslation(Vector3(x, y, 1)) * Matrix3::getRotationMatrix(r);
 		this->vertexCount = vertices;
 		this->color = color;
 	}
 
-	void Shape::UpdatePosition()
+	void Shape::StepForward()
 	{
-		this->setPosition(getPosition() + velocity);
+		this->SetPosition(GetPosition() + velocity);
+	}
+
+	void Shape::StepForward(const Vector3& step)
+	{
+		this->SetPosition(GetPosition() + step);
+	}
+
+	void Shape::StepBackward()
+	{
+		this->SetPosition(GetPosition() - velocity);
+	}
+
+	void Shape::StepBackward(const Vector3 & step)
+	{
+		this->SetPosition(GetPosition() - step);
 	}
 
 	Shape::~Shape()

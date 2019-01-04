@@ -18,31 +18,38 @@ namespace Assignment
 	public:
 
 		static const float PI_F;
-		enum bounds { None, Wrap, Bounce };
+		enum bounds { bndNone, bndWrap, bndBounce };
 
 		Matrix3 transform = Matrix3();
 		Vector3 velocity = Vector3();
 
 		AssignmentApp::Colour color = AssignmentApp::Colour(1, 0, 0);
 
-		int boundsMode = None;
+		int boundsMode = bndNone;
 		bool solid = false;
+		bool rigid = false;
 
-		virtual Vector3 getPosition();
-		virtual void setPosition(Vector3 pos);
+		virtual Vector3 GetPosition();
+		virtual void SetPosition(Vector3 pos);
 
 		virtual void Reflect(Vector3 norm);
+		virtual void Bounce(Shape* obj);
 		virtual void Bounds(float left, float right, float bottom, float top, int mode);
 
-		virtual void PreCalc();
-		virtual bool PointInside(float x, float y);
-		virtual bool Intersect(Shape* obj);
+		virtual void PrecalcVertexBounds();
+		virtual bool PointInside(const Vector3& point);
+		virtual bool Intersect(Shape* obj, bool nextStep = false);
 
 		virtual void Init(float x, float y, float r, int vertices, AssignmentApp::Colour color);
 		virtual void Connect();
 		virtual void Globalize();
-		virtual void UpdatePosition();
 
+		virtual void StepForward();
+		virtual void StepForward(const Vector3& step);
+		virtual void StepBackward();
+		virtual void StepBackward(const Vector3& step);
+
+		virtual float GetNarrowPhysicsDistance() = 0;
 		virtual void Update() = 0;
 		virtual void Draw();
 
@@ -59,6 +66,9 @@ namespace Assignment
 		int segments;
 		float radius;
 
+		bool PointInside(const Vector3& point);
+
+		float GetNarrowPhysicsDistance();
 		void Update();
 
 	};
@@ -73,6 +83,7 @@ namespace Assignment
 		float height;
 		float width;
 
+		float GetNarrowPhysicsDistance();
 		void Update();
 
 	};
@@ -87,6 +98,7 @@ namespace Assignment
 		float base;
 		float height;
 
+		float GetNarrowPhysicsDistance();
 		void Update();
 
 	};

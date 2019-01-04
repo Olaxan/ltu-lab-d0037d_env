@@ -38,9 +38,11 @@ namespace Assignment
 		const float& y() const { return _arr[1]; }
 		void y(const float& y) { this->_arr[1] = y; }
 
-		static float dot(const Vector2 &x, const Vector2 &y);
+		static float dist(const Vector2& x, const Vector2& y);
+		static float dot(const Vector2& x, const Vector2& y);
 		float dot(const Vector2 &other) const;
-		float norm() const;
+		float length() const;
+		Vector2 norm() const;
 
 		/// Performs a matrix transformation on the Vector2 and returns the result.
 		Vector2 getTransformed(const Matrix2 &trans) const;
@@ -92,9 +94,11 @@ namespace Assignment
 		const float& z() const { return _arr[2]; }
 		void z(const float& z) { this->_arr[2] = z; }
 
-		static float dot(const Vector3 &x, const Vector3 &y);
+		static float dist(const Vector3& x, const Vector3& y);
+		static float dot(const Vector3& x, const Vector3& y);
 		float dot(const Vector3 &other) const;
-		float norm() const;
+		float length() const;
+		Vector3 norm() const;
 
 		Vector3 getTransformed(const Matrix3 &trans) const;
 		Vector3 getReflection(const Vector3 &normal) const;

@@ -10,6 +10,11 @@ namespace Assignment
 		this->Update();
 	}
 
+	float Triangle::GetNarrowPhysicsDistance()
+	{
+		return sqrtf(pow(height / 2, 2) + pow(base / 2, 2)) * 1.5;
+	}
+
 	void Triangle::Update()
 	{
 		float halfHeight = height / 2;
@@ -25,7 +30,7 @@ namespace Assignment
 		_vertices[2].y(halfHeight);
 
 		this->Bounds(-1, 1, -1, 1, boundsMode);
-		this->UpdatePosition();
+		this->StepForward();
 		this->Globalize();
 		this->Connect();
 	}

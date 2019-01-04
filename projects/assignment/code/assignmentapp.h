@@ -27,7 +27,7 @@ namespace Assignment
 
 		static int time;
 
-		std::vector<Shape*> renderQueue;
+		std::vector<Shape*> gameShapes;
 
 		/// destructor
 		~AssignmentApp();
