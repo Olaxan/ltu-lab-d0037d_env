@@ -11,6 +11,8 @@ namespace Assignment
 	protected:
 		Vector3* _vertices;
 		AssignmentApp::LineData* _lines;
+		float* _constant;
+		float* _multiple;
 		int vertexCount;
 
 	public:
@@ -32,12 +34,17 @@ namespace Assignment
 		virtual void Reflect(Vector3 norm);
 		virtual void Bounds(float left, float right, float bottom, float top, int mode);
 
+		virtual void PreCalc();
+		virtual bool PointInside(float x, float y);
+		virtual bool Intersect(Shape* obj);
+
+		virtual void Init(float x, float y, float r, int vertices, AssignmentApp::Colour color);
 		virtual void Connect();
 		virtual void Globalize();
-		virtual void Draw();
+		virtual void UpdatePosition();
 
 		virtual void Update() = 0;
-		virtual void UpdatePosition();
+		virtual void Draw();
 
 		virtual ~Shape();
 

@@ -6,12 +6,7 @@ namespace Assignment
 {
 	Rectangle::Rectangle(float x, float y, float r, float height, float width, AssignmentApp::Colour color) : height(height), width(width)
 	{
-		this->_vertices = new Vector3[4]{ Vector3(true), Vector3(true), Vector3(true), Vector3(true) };
-		this->_lines = new AssignmentApp::LineData[4];
-		this->transform = Matrix3::getRotationMatrix(r) * Matrix3::getTranslation(Vector3(x, y, 1));
-		this->color = color;
-		this->vertexCount = 4;
-
+		this->Init(x, y, r, 4, color);
 		this->Update();
 	}
 

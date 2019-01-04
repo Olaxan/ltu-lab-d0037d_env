@@ -6,19 +6,9 @@
 
 namespace Assignment
 {
-	Circle::Circle(float x, float y, float r, float radius, int segments, AssignmentApp::Colour color)
+	Circle::Circle(float x, float y, float r, float radius, int segments, AssignmentApp::Colour color) : radius(radius)
 	{
-		this->_vertices = new Vector3[segments];
-		this->_lines = new AssignmentApp::LineData[segments];
-		for (int i = 0; i < segments; i++)
-		{
-			_vertices[i] = Vector3(true);
-		}
-		this->transform = Matrix3::getRotationMatrix(r) * Matrix3::getTranslation(Vector3(x, y, 1));
-		this->vertexCount = segments;
-		this->radius = radius;
-		this->color = color;
-
+		this->Init(x, y, r, segments, color);
 		this->Update();
 	}
 

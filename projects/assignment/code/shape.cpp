@@ -75,6 +75,60 @@ namespace Assignment
 		setPosition(pos);
 	}
 
+	void Shape::PreCalc()
+	{
+		int i;
+		int j = vertexCount - 1;
+
+		for (i = 0; i < vertexCount; i++)
+		{
+			if (_vertices[j].y() == _vertices[i].y())
+			{
+				_constant[i] = _vertices[i].x();
+				_multiple[i] = 0;
+			}
+			else
+			{
+				_constant[i] = _vertices[i].x() - (_vertices[i].y() * _vertices[j].x()) / (_vertices[j].y() - _vertices[i].y()) + (_vertices[i].y() * _vertices[i].x()) / (_vertices[j].y() - _vertices[i].y());
+				_multiple[i] = (_vertices[j].x() - _vertices[i].x()) / (_vertices[j].y() - _vertices[i].y());
+			}
+
+			j = i;
+		}
+	}
+
+	bool Shape::PointInside(float x, float y)
+	{
+		int i;
+		int j = vertexCount - 1;
+		bool  oddNodes = false;
+
+		for (i = 0; i < vertexCount; i++)
+		{
+			if ((_vertices[i].y() < y && _vertices[j].y() >= y || _vertices[j].y() < y && _vertices[i].y() >= y))
+			{
+				oddNodes ^= (y*_multiple[i] + _constant[i] < x);
+			}
+
+			j = i;
+		}
+
+		return oddNodes;
+	}
+
+	bool Shape::Intersect(Shape * obj)
+	{
+		PreCalc();
+
+		for (int i = 0; i < obj->vertexCount; i++)
+		{
+			if (PointInside(obj->_vertices[i].x(), obj->_vertices[i].y()))
+				return true;
+		}
+
+		return false;
+	}
+
 	void Shape::Connect()
 	{
 
@@ -112,6 +166,21 @@ namespace Assignment
 		}
 	}
 
+	void Shape::Init(float x, float y, float r, int vertices, AssignmentApp::Colour color)
+	{
+		this->_vertices = new Vector3[vertices];
+		this->_constant = new float[vertices];
+		this->_multiple = new float[vertices];
+		this->_lines = new AssignmentApp::LineData[vertices];
+		for (int i = 0; i < vertices; i++)
+		{
+			_vertices[i] = Vector3(true);
+		}
+		this->transform = Matrix3::getRotationMatrix(r) * Matrix3::getTranslation(Vector3(x, y, 1));
+		this->vertexCount = vertices;
+		this->color = color;
+	}
+
 	void Shape::UpdatePosition()
 	{
 		this->setPosition(getPosition() + velocity);
@@ -121,5 +190,7 @@ namespace Assignment
 	{
 		delete[] _lines;
 		delete[] _vertices;
+		delete[] _constant;
+		delete[] _multiple;
 	}
 }
