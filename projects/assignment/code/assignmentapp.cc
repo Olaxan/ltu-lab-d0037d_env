@@ -14,6 +14,7 @@ namespace Assignment
 {
 
 	int AssignmentApp::time = 0;
+	int AssignmentApp::score = 0;
 
 	AssignmentApp::AssignmentApp()
 	{
@@ -128,6 +129,26 @@ namespace Assignment
 	{
 		Display::Window* win = this->GetWindow();
 		win->SetKeyPressFunction([this](int key, int, int action, int mod) {this->KeyEvent(key, action, mod); });
+
+		Shape* player = new Rectangle(0, -0.8, 0, 0.1, 0.3);
+		player->rigid = true;
+		player->solid = true;
+		player->boundsMode = Shape::bndBounce;
+		gameShapes.push_back(player);
+
+		Shape* ball = new Circle(0, -0.5, 0, 0.03, 8, AssignmentApp::Colour::random());
+		ball->solid = true;
+		ball->velocity = Vector3(0, -0.005, 0);
+		ball->boundsMode = Shape::bndBounce;
+		gameShapes.push_back(ball);
+
+		for (int i = 0; i < 20; i++)
+		{
+			Shape* tri = new Triangle(randf(-1, 1), randf(0,1), randf(0, Shape::PI_F * 2), 0.2, 0.2, AssignmentApp::Colour::random());
+			tri->solid = true;
+			tri->rigid = true;
+			gameShapes.push_back(tri);
+		}
 	}
 
 	void AssignmentApp::Update()
@@ -147,11 +168,13 @@ namespace Assignment
 			{
 				other = gameShapes[j];
 
-				if (i == j)
-					continue;
-
-				if (obj->solid && other->solid && obj->Intersect(other, true))
-					obj->Bounce(other);
+				if (i != j && obj->PhysCollisionStep(other) && typeid(*other) == typeid(Triangle))
+				{
+					gameShapes.erase(gameShapes.begin() + j);
+					std::cout << "\rScore: " << ++score;
+					if (score == 20)
+						std::cout << "\nYou WIN! :) :) :)";
+				}
 			}
 
 			obj->Update();

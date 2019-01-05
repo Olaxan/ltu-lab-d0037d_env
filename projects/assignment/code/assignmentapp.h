@@ -26,6 +26,7 @@ namespace Assignment
 		}
 
 		static int time;
+		static int score;
 
 		std::vector<Shape*> gameShapes;
 

@@ -1,6 +1,6 @@
 #include "shapes.h"
 
-#include <iostream>
+#include <algorithm>
 
 namespace Assignment
 {
@@ -18,20 +18,20 @@ namespace Assignment
 		this->transform(2, 2) = pos.z();
 	}
 
-	void Shape::Reflect(Vector3 norm)
+	void Shape::PhysReflect(Vector3 norm)
 	{
 		velocity = velocity.getReflection(norm);
 	}
 
-	void Shape::Bounce(Shape* obj)
+	void Shape::PhysBounce(Shape* obj)
 	{
 		Vector3 norm = (obj->GetPosition() - GetPosition()).norm();
 
 		if (!rigid)
-			Reflect(norm);
+			velocity = norm * velocity.length() * -1; //PhysReflect(norm);
 
 		if (!obj->rigid)
-			obj->Reflect(norm * -1);
+			obj->velocity = norm * obj->velocity.length(); //obj->PhysReflect(norm * -1);
 
 	}
 
@@ -49,7 +49,7 @@ namespace Assignment
 			else
 			{
 				pos.x(left);
-				Reflect(Vector3(1, 0, 0));
+				PhysReflect(Vector3(1, 0, 0));
 			}
 		}
 		else if (pos.x() + velocity.x() > right)
@@ -59,7 +59,7 @@ namespace Assignment
 			else
 			{
 				pos.x(right);
-				Reflect(Vector3(-1, 0, 0));
+				PhysReflect(Vector3(-1, 0, 0));
 			}
 		}
 
@@ -70,7 +70,7 @@ namespace Assignment
 			else
 			{
 				pos.y(bottom);
-				Reflect(Vector3(0, 1, 0));
+				PhysReflect(Vector3(0, 1, 0));
 			}
 		}
 		else if (pos.y() + velocity.y() > top)
@@ -80,11 +80,32 @@ namespace Assignment
 			else
 			{
 				pos.y(top);
-				Reflect(Vector3(0, -1, 0));
+				PhysReflect(Vector3(0, -1, 0));
 			}
 		}
 
 		SetPosition(pos);
+	}
+
+	bool Shape::PhysCollisionStep(Shape* other)
+	{
+		bool hit = false;
+		Vector3 thisPrev = GetPosition();
+		Vector3 otherPrev = other->GetPosition();
+
+		StepForward();
+		other->StepForward();
+
+		if (solid && other->solid && other->Intersect(this))
+		{
+			hit = true;
+			PhysBounce(other);
+		}
+
+		SetPosition(thisPrev);
+		other->SetPosition(otherPrev);
+
+		return hit;
 	}
 
 	void Shape::PrecalcVertexBounds()
@@ -128,24 +149,15 @@ namespace Assignment
 		return oddNodes;
 	}
 
-	bool Shape::Intersect(Shape * obj, bool nextStep)
+	bool Shape::Intersect(Shape * obj)
 	{
 		PrecalcVertexBounds();
 
-		if (nextStep)
-			StepForward();
-
-		if (Vector3::dist(GetPosition(), obj->GetPosition()) < GetNarrowPhysicsDistance() + obj->GetNarrowPhysicsDistance())
+		for (int i = 0; i < obj->vertexCount; i++)
 		{
-			for (int i = 0; i < obj->vertexCount; i++)
-			{
-				if (this->PointInside(obj->_vertices[i]))
-					return true;
-			}
+			if (this->PointInside(obj->_vertices[i]))
+				return true;
 		}
-
-		if (nextStep)
-			StepBackward();
 
 		return false;
 	}
@@ -207,19 +219,9 @@ namespace Assignment
 		this->SetPosition(GetPosition() + velocity);
 	}
 
-	void Shape::StepForward(const Vector3& step)
-	{
-		this->SetPosition(GetPosition() + step);
-	}
-
 	void Shape::StepBackward()
 	{
 		this->SetPosition(GetPosition() - velocity);
-	}
-
-	void Shape::StepBackward(const Vector3 & step)
-	{
-		this->SetPosition(GetPosition() - step);
 	}
 
 	Shape::~Shape()

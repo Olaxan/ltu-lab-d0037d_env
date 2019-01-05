@@ -15,6 +15,8 @@ namespace Assignment
 		float* _multiple;
 		int vertexCount;
 
+		virtual void PrecalcVertexBounds();
+
 	public:
 
 		static const float PI_F;
@@ -29,27 +31,25 @@ namespace Assignment
 		bool solid = false;
 		bool rigid = false;
 
+		virtual void Init(float x, float y, float r, int vertices, AssignmentApp::Colour color);
+
 		virtual Vector3 GetPosition();
 		virtual void SetPosition(Vector3 pos);
 
-		virtual void Reflect(Vector3 norm);
-		virtual void Bounce(Shape* obj);
+		virtual void StepForward();
+		virtual void StepBackward();
+
 		virtual void Bounds(float left, float right, float bottom, float top, int mode);
 
-		virtual void PrecalcVertexBounds();
-		virtual bool PointInside(const Vector3& point);
-		virtual bool Intersect(Shape* obj, bool nextStep = false);
+		virtual void PhysReflect(Vector3 norm);
+		virtual void PhysBounce(Shape* obj);
+		virtual bool PhysCollisionStep(Shape* other);
 
-		virtual void Init(float x, float y, float r, int vertices, AssignmentApp::Colour color);
+		virtual bool PointInside(const Vector3& point);
+		virtual bool Intersect(Shape* obj);
+
 		virtual void Connect();
 		virtual void Globalize();
-
-		virtual void StepForward();
-		virtual void StepForward(const Vector3& step);
-		virtual void StepBackward();
-		virtual void StepBackward(const Vector3& step);
-
-		virtual float GetNarrowPhysicsDistance() = 0;
 		virtual void Update() = 0;
 		virtual void Draw();
 

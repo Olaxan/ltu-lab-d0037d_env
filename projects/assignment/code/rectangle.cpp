@@ -12,7 +12,7 @@ namespace Assignment
 
 	float Rectangle::GetNarrowPhysicsDistance()
 	{
-		return sqrt(pow(width / 2, 2) + pow(height/2, 2)) * 1.1;
+		return sqrtf(pow(width / 2, 2) + pow(height/2, 2)) * 1.5;
 	}
 
 	void Rectangle::Update()

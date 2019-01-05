@@ -1,6 +1,7 @@
 #include "shapes.h"
 
 #include <iostream>
+#include <algorithm>
 
 namespace Assignment
 {
@@ -12,7 +13,7 @@ namespace Assignment
 
 	float Triangle::GetNarrowPhysicsDistance()
 	{
-		return sqrtf(pow(height / 2, 2) + pow(base / 2, 2)) * 1.5;
+		return std::max(height / 2, sqrtf(pow(height / 2, 2) + pow(base / 2, 2))) * 1.5;
 	}
 
 	void Triangle::Update()
