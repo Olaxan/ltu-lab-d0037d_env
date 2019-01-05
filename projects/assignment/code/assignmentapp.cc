@@ -136,7 +136,7 @@ namespace Assignment
 		player->boundsMode = Shape::bndBounce;
 		gameShapes.push_back(player);
 
-		Shape* ball = new Circle(0, -0.5, 0, 0.03, 8, AssignmentApp::Colour::random());
+		Shape* ball = new Circle(0, -0.5, 0, 0.03, 8, AssignmentApp::Colour(1,0,0));
 		ball->solid = true;
 		ball->velocity = Vector3(0, -0.005, 0);
 		ball->boundsMode = Shape::bndBounce;
@@ -144,7 +144,7 @@ namespace Assignment
 
 		for (int i = 0; i < 20; i++)
 		{
-			Shape* tri = new Triangle(randf(-1, 1), randf(0,1), randf(0, Shape::PI_F * 2), 0.2, 0.2, AssignmentApp::Colour::random());
+			Shape* tri = new Triangle(randf(-1, 1), randf(0,1), randf(0, Shape::PI_F * 2), randf(0.2, 0.5), randf(0.2, 0.5), AssignmentApp::Colour::random());
 			tri->solid = true;
 			tri->rigid = true;
 			gameShapes.push_back(tri);
@@ -164,16 +164,19 @@ namespace Assignment
 		{
 			obj = gameShapes[i];
 
-			for (int j = 0; j < gameShapes.size(); j++)
+			if (typeid(*obj) != typeid(Triangle))
 			{
-				other = gameShapes[j];
-
-				if (i != j && obj->PhysCollisionStep(other) && typeid(*other) == typeid(Triangle))
+				for (int j = 0; j < gameShapes.size(); j++)
 				{
-					gameShapes.erase(gameShapes.begin() + j);
-					std::cout << "\rScore: " << ++score;
-					if (score == 20)
-						std::cout << "\nYou WIN! :) :) :)";
+					other = gameShapes[j];
+
+					if (i != j && obj->PhysCollisionStep(other) && typeid(*other) == typeid(Triangle))
+					{
+						gameShapes.erase(gameShapes.begin() + j);
+						std::cout << "\rScore: " << ++score;
+						if (score == 20)
+							std::cout << "\nYou WIN! :) :) :)";
+					}
 				}
 			}
 
